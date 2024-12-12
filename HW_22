@@ -1,0 +1,46 @@
+import requests
+from plyer import notification
+
+API_KEY = '23496c2a58b99648af590ee8a29c5348'
+CITY = 'Москва'
+
+def get_weather(city: str, api_key: str) -> dict:
+    """Получает данные о погоде для указанного города."""
+    url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric&lang=ru'
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f'Ошибка получения данных: {response.status_code}')
+        return {}
+
+def format_weather_message(weather_dict: dict) -> str:
+    """Форматирует сообщение о погоде."""
+    temp = weather_dict['main']['temp']
+    feels_like = weather_dict['main']['feels_like']
+    description = weather_dict['weather'][0]['description']
+    
+    return (f'Температура: {temp}°C\n'
+            f'Ощущается как: {feels_like}°C\n'
+            f'Описание: {description}')
+
+def notify_weather(message: str) -> None:
+    """Отправляет уведомление с информацией о погоде."""
+    notification.notify(
+        title='Погода в Москве',
+        message=message,
+        app_name='Weather'
+    )
+
+def main() -> None:
+    """Запускает основную логику приложения."""
+    weather_data = get_weather(CITY, API_KEY)
+    
+    if weather_data:
+        weather_message = format_weather_message(weather_data)
+        print(weather_message)
+        notify_weather(weather_message)
+
+if __name__ == '__main__':
+    main()
