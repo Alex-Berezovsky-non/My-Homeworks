@@ -75,3 +75,23 @@ def append_csv(data: list[dict], file_path: str, delimiter: str = ';', encoding:
     with open(file_path, 'a', encoding=encoding, newline='') as file:
         writer = csv.DictWriter(file, fieldnames=data[0].keys(), delimiter=delimiter)
         writer.writerows(data)
+def read_txt(file_path: str, encoding: str = "utf-8") -> str:
+    """
+    Читает данные из текстового файла.
+
+    :param file_path: Путь к файлу.
+    :param encoding: Кодировка файла (по умолчанию "utf-8").
+    :return: Содержимое файла.
+    """
+    with open(file_path, 'r', encoding=encoding) as file:
+        return file.read()
+def write_txt(data: str, file_path: str, encoding: str = "utf-8") -> None:
+    """
+    Записывает данные в текстовый файл.
+
+    :param data: Данные для записи.
+    :param file_path: Путь к файлу.
+    :param encoding: Кодировка файла (по умолчанию "utf-8").
+    """
+    with open(file_path, 'w', encoding=encoding) as file:
+        file.write(data)
