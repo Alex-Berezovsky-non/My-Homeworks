@@ -32,3 +32,15 @@ def append_json(data: list[dict], file_path: str, encoding: str = "utf-8") -> No
     existing_data = read_json(file_path, encoding) if file_path else []
     existing_data.extend(data)
     write_json(existing_data, file_path, encoding)
+def read_csv(file_path: str, delimiter: str = ';', encoding: str = "windows-1251") -> list[dict]:
+    """
+    Читает данные из CSV-файла.
+
+    :param file_path: Путь к файлу.
+    :param delimiter: Разделитель полей в файле (по умолчанию ";").
+    :param encoding: Кодировка файла (по умолчанию "windows-1251").
+    :return: Данные, считанные из файла.
+    """
+    with open(file_path, 'r', encoding=encoding) as file:
+        reader = csv.DictReader(file, delimiter=delimiter)
+        return list(reader)
