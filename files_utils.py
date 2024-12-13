@@ -105,4 +105,13 @@ def append_txt(data: str, file_path: str, encoding: str = "utf-8") -> None:
     """
     with open(file_path, 'a', encoding=encoding) as file:
         file.write(data)
+def read_yaml(file_path: str) -> dict:
+    """
+    Читает данные из YAML-файла.
+
+    :param file_path: Путь к файлу.
+    :return: Данные, считанные из файла.
+    """
+    with open(file_path, 'r', encoding='utf-8') as file:
+        return yaml.safe_load(file)
 
