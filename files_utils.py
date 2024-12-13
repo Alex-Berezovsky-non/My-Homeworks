@@ -95,3 +95,14 @@ def write_txt(data: str, file_path: str, encoding: str = "utf-8") -> None:
     """
     with open(file_path, 'w', encoding=encoding) as file:
         file.write(data)
+def append_txt(data: str, file_path: str, encoding: str = "utf-8") -> None:
+    """
+    Добавляет данные в конец текстового файла.
+
+    :param data: Данные для добавления.
+    :param file_path: Путь к файлу.
+    :param encoding: Кодировка файла (по умолчанию "utf-8").
+    """
+    with open(file_path, 'a', encoding=encoding) as file:
+        file.write(data)
+
