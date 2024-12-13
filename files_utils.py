@@ -21,3 +21,14 @@ def write_json(data: dict, file_path: str, encoding: str = "utf-8") -> None:
     """
     with open(file_path, 'w', encoding=encoding) as file:
         json.dump(data, file, ensure_ascii=False, indent=4)
+def append_json(data: list[dict], file_path: str, encoding: str = "utf-8") -> None:
+    """
+    Добавляет данные в существующий JSON-файл.
+
+    :param data: Список словарей с данными для добавления.
+    :param file_path: Путь к файлу.
+    :param encoding: Кодировка файла (по умолчанию "utf-8").
+    """
+    existing_data = read_json(file_path, encoding) if file_path else []
+    existing_data.extend(data)
+    write_json(existing_data, file_path, encoding)
