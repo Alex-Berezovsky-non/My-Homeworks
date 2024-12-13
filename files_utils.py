@@ -44,3 +44,19 @@ def read_csv(file_path: str, delimiter: str = ';', encoding: str = "windows-1251
     with open(file_path, 'r', encoding=encoding) as file:
         reader = csv.DictReader(file, delimiter=delimiter)
         return list(reader)
+def write_csv(data: list[dict], file_path: str, delimiter: str = ';', encoding: str = "windows-1251") -> None:
+    """
+    Записывает данные в CSV-файл.
+
+    :param data: Данные для записи.
+    :param file_path: Путь к файлу.
+    :param delimiter: Разделитель полей в файле (по умолчанию ";").
+    :param encoding: Кодировка файла (по умолчанию "windows-1251").
+    """
+    if not data:
+        raise ValueError("Data cannot be empty")
+    
+    with open(file_path, 'w', encoding=encoding, newline='') as file:
+        writer = csv.DictWriter(file, fieldnames=data[0].keys(), delimiter=delimiter)
+        writer.writeheader()
+        writer.writerows(data)
