@@ -60,3 +60,18 @@ def write_csv(data: list[dict], file_path: str, delimiter: str = ';', encoding: 
         writer = csv.DictWriter(file, fieldnames=data[0].keys(), delimiter=delimiter)
         writer.writeheader()
         writer.writerows(data)
+def append_csv(data: list[dict], file_path: str, delimiter: str = ';', encoding: str = "windows-1251") -> None:
+    """
+    Добавляет данные в существующий CSV-файл.
+
+    :param data: Данные для добавления.
+    :param file_path: Путь к файлу.
+    :param delimiter: Разделитель полей в файле (по умолчанию ";").
+    :param encoding: Кодировка файла (по умолчанию "windows-1251").
+    """
+    if not data:
+        raise ValueError("Data cannot be empty")
+    
+    with open(file_path, 'a', encoding=encoding, newline='') as file:
+        writer = csv.DictWriter(file, fieldnames=data[0].keys(), delimiter=delimiter)
+        writer.writerows(data)
