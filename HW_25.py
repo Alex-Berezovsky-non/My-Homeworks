@@ -42,3 +42,22 @@ def sort_dict_by_year(data: dict) -> dict:
     Сортирует словарь по ключу 'year'.
     """
     return dict(sorted(data.items(), key=lambda x: int(x[1]['year']) if isinstance(x[1]['year'], str) and x[1]['year'].isdigit() else (x[1]['year'] if isinstance(x[1]['year'], int) else float('inf'))))
+# Функция для сортировки словаря по году и названию
+def sort_dict_by_year_and_title(data: dict) -> dict:
+    """
+    Сортирует словарь по двум ключам: 'year' и 'title'.
+    """
+    return dict(sorted(data.items(), key=lambda x: (
+        int(x[1]['year']) if isinstance(x[1]['year'], str) and x[1]['year'].isdigit() else (x[1]['year'] if isinstance(x[1]['year'], int) else float('inf')),
+        x[1]['title'] if x[1]['title'] is not None else ''
+    )))
+
+# Функция для однострочника: фильтрация и сортировка
+def filter_and_sort_movies(data: dict) -> dict:
+    """
+    Фильтрует фильмы, названия которых начинаются на 'Ч', и сортирует их по году.
+    """
+    return dict(sorted(filter(lambda x: x[1]['title'] is not None and x[1]['title'].startswith('Ч'), data.items()), key=lambda x: (
+        int(x[1]['year']) if isinstance(x[1]['year'], str) and x[1]['year'].isdigit() else (x[1]['year'] if isinstance(x[1]['year'], int) else float('inf')),
+        x[1]['title'] if x[1]['title'] is not None else ''
+    )))
