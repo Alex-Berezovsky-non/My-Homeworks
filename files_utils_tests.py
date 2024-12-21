@@ -6,7 +6,6 @@ from files_utils import (
     read_txt, write_txt, append_txt,
     read_yaml  
 )
-
 # Тестовые данные
 test_json_data = {"name": "Alice", "age": 30}
 test_csv_data = [{"name": "Bob", "age": 25}, {"name": "Charlie", "age": 35}]
