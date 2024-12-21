@@ -29,3 +29,16 @@ def convert_years_to_strings(data: dict) -> dict:
     Создает копию словаря, где значения ключа 'year' преобразованы в строки.
     """
     return {id_: {**movie, 'year': str(movie['year'])} for id_, movie in data.items()}
+# Функция для фильтрации фильмов, начинающихся на букву 'Ч'
+def filter_movies_starting_with_ch(data: dict) -> dict:
+    """
+    Фильтрует фильмы, названия которых начинаются на букву 'Ч'.
+    """
+    return {id_: movie for id_, movie in data.items() if movie['title'] is not None and movie['title'].startswith('Ч')}
+
+# Функция для сортировки словаря по году
+def sort_dict_by_year(data: dict) -> dict:
+    """
+    Сортирует словарь по ключу 'year'.
+    """
+    return dict(sorted(data.items(), key=lambda x: int(x[1]['year']) if isinstance(x[1]['year'], str) and x[1]['year'].isdigit() else (x[1]['year'] if isinstance(x[1]['year'], int) else float('inf'))))
