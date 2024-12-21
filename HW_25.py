@@ -61,3 +61,50 @@ def filter_and_sort_movies(data: dict) -> dict:
         int(x[1]['year']) if isinstance(x[1]['year'], str) and x[1]['year'].isdigit() else (x[1]['year'] if isinstance(x[1]['year'], int) else float('inf')),
         x[1]['title'] if x[1]['title'] is not None else ''
     )))
+# Основной код
+if __name__ == "__main__":
+    # 1. Получаем ввод пользователя
+    user_ids = get_user_input()
+
+    # 2. Фильтруем словарь по введенным id
+    filtered_dict = filter_dict_by_ids(full_dict, user_ids)
+
+    # 3. Создаем множество уникальных режиссеров
+    unique_directors = get_unique_directors(full_dict)
+
+    # 4. Преобразуем годы в строки
+    year_as_string_dict = convert_years_to_strings(full_dict)
+
+    # 5. Фильтруем фильмы, начинающиеся на 'Ч'
+    starts_with_ch = filter_movies_starting_with_ch(full_dict)
+
+    # 6. Сортируем словарь по году
+    sorted_by_year = sort_dict_by_year(full_dict)
+
+    # 7. Сортируем словарь по году и названию
+    sorted_by_year_and_title = sort_dict_by_year_and_title(full_dict)
+
+    # 8. Однострочник: фильтрация и сортировка
+    filtered_and_sorted = filter_and_sort_movies(full_dict)
+
+    # Красивый вывод результатов
+    print("Задание 2: Словарь по введенным id")
+    pprint(filtered_dict)
+
+    print("\nЗадание 3: Уникальные режиссеры")
+    pprint(unique_directors)
+
+    print("\nЗадание 4: Годы как строки")
+    pprint(year_as_string_dict)
+
+    print("\nЗадание 5: Фильмы, начинающиеся на 'Ч'")
+    pprint(starts_with_ch)
+
+    print("\nЗадание 6: Сортировка по году")
+    pprint(sorted_by_year)
+
+    print("\nЗадание 7: Сортировка по году и названию")
+    pprint(sorted_by_year_and_title)
+
+    print("\nЗадание 8: Однострочник для фильтрации и сортировки")
+    pprint(filtered_and_sorted)
