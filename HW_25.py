@@ -16,3 +16,16 @@ def filter_dict_by_ids(data: dict, ids: list[int | None]) -> dict:
     Фильтрует словарь по переданным id.
     """
     return {id_: data[id_] for id_ in ids if id_ in data}
+# Функция для создания множества уникальных режиссеров
+def get_unique_directors(data: dict) -> set[str]:
+    """
+    Создает множество уникальных значений ключа 'director'.
+    """
+    return {movie['director'] for movie in data.values()}
+
+# Функция для создания копии словаря с годами в виде строк
+def convert_years_to_strings(data: dict) -> dict:
+    """
+    Создает копию словаря, где значения ключа 'year' преобразованы в строки.
+    """
+    return {id_: {**movie, 'year': str(movie['year'])} for id_, movie in data.items()}
