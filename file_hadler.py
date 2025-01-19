@@ -23,6 +23,20 @@ class FileHandler:
             return""
 
     @staticmethod
+    def write_file(filepath: str, *data: str) -> None:
+        """
+        Записывает переданные строки в файл.
+        Если файл существует, он будет перезаписан.
+
+        :param filepath: Путь к файлу.
+        :param data: Строки для записи в файл.
+        """
+        try:
+            with open(filepath, 'w', encoding='utf-8') as file:
+                file.writelines(data)
+        except Exception as e:
+            print(f"Произошла ошибка при записи файла: {e}")
+    @staticmethod
     def append_file(filepath: str, *data:str) -> None:
         """
         Добавляет переданные строки в конец файла.
